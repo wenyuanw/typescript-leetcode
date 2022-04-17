@@ -11,15 +11,6 @@
  *     }
  * }
  */
-
-/*  
- 一个树是另一个树的子树，则
- 要么这两个树相等
- 要么这个树是左树的子树
- 要么这个树是右树的子树 
- 参考以下第 100 题 「相同的树」
- */
-
 class TreeNode {
   val: number
   left: TreeNode | null
@@ -42,6 +33,19 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
   }
 };
 
-function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
+/*  
+ 一个树是另一个树的子树，则
+ 要么这两个树相等
+ 要么这个树是左树的子树
+ 要么这个树是右树的子树 
+ 参考以下第 100 题 「相同的树」
+ */
 
+function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
+  if (root === null && subRoot === null) return true
+  if (root === null && subRoot !== null) return false
+
+  return isSameTree(root, subRoot)
+    || isSubtree(root.left, subRoot)
+    || isSubtree(root.right, subRoot)
 };
